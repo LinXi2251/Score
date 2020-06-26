@@ -17,13 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myViewModel.scoreA.observe(this, Observer {
-            textViewScoreA.text = it.toString()
-        })
-
-        myViewModel.scoreB.observe(this, Observer {
-            textViewScoreB.text = it.toString()
-        })
+        // 设置组件的集合实现其是否可见
         val setButtonsEnable = setOf(
             buttonOK, button1A, button2A, button3A, button1B, button2B, button3B, imageButtonReset, imageButtonUndo
         )
@@ -33,6 +27,17 @@ class MainActivity : AppCompatActivity() {
         val setVisibleEnd = setOf(
             textViewA, textViewB
         )
+        // end
+
+        // 数据展示用Observer进行观察
+        myViewModel.scoreA.observe(this, Observer {
+            textViewScoreA.text = it.toString()
+        })
+
+        myViewModel.scoreB.observe(this, Observer {
+            textViewScoreB.text = it.toString()
+        })
+        // 根据flag的状态判断是在计数状态还是在设置队名状态
         myViewModel.visibleFlag.observe(this, Observer { flag ->
             // flag == 1 --> 已经完成队名的初始化 --> 开始界面部分组件隐藏
             if (flag == 1) {
@@ -58,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
         myViewModel.teamNameA.observe(this, Observer {
             textViewA.text = it
         })
@@ -66,10 +70,13 @@ class MainActivity : AppCompatActivity() {
         myViewModel.teamNameB.observe(this, Observer {
             textViewB.text = it
         })
+        // end
+
         editTextTextA.requestFocus()
-        // 保留功能之后会用
+        // 保留功能之后会用到对键盘的一个操作
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(editTextTextA, 1)
+        // 监视文本框 --> 当两个都有值的时候使得按键可用
         val textWatcher = object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
@@ -86,10 +93,14 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        // 添加监视
         editTextTextA.addTextChangedListener(textWatcher)
         editTextTextB.addTextChangedListener(textWatcher)
+        // end
 
+        // 按键触发设置双方队名
         buttonOK.setOnClickListener { button ->
+            // 隐藏键盘
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).also {
                 it.hideSoftInputFromWindow(button.windowToken, 0)
             }
@@ -109,9 +120,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-
         }
+        // end
 
+        // 计数
         button1A.setOnClickListener {
             myViewModel.addA(1)
         }
@@ -131,6 +143,7 @@ class MainActivity : AppCompatActivity() {
         button3B.setOnClickListener {
             myViewModel.addB(3)
         }
+        // end
 
         imageButtonUndo.setOnClickListener {
             myViewModel.undo()
@@ -140,7 +153,7 @@ class MainActivity : AppCompatActivity() {
             alertDialog.apply {
                 setMessage("是否改变双方队名")
                 setPositiveButton("是") { _, _ ->
-                    myViewModel.setFlagValue(0)
+                    myViewModel.setFlagValue(0) // flag = 0 状态为修改队名状态
                 }
                 setNegativeButton("否", null)
                 create()
@@ -149,7 +162,7 @@ class MainActivity : AppCompatActivity() {
             myViewModel.reset()
         }
     }
-
+    // 保存数据
     override fun onStop() {
         super.onStop()
         myViewModel.saveData()

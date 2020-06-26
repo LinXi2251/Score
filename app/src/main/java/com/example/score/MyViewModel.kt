@@ -14,6 +14,7 @@ const val VISIBLE_FLAG = "visible_flag"
 const val TEAM_NAME_A = "team_name_A"
 const val TEAM_NAME_B = "team_name_B"
 class MyViewModel(application: Application) : AndroidViewModel(application) {
+    // 利用shp进行数据的保存(注意写法)
     private val shp = application.getSharedPreferences(VALUES, Context.MODE_PRIVATE)
 
     private val _scoreA = MutableLiveData<Int>().also {
@@ -37,6 +38,7 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     val teamNameB:LiveData<String> = _teamNameB
     val visibleFlag: LiveData<Int> = _visibleFlag
 
+    // 设置stack为undo做准备
     private val listA = Stack<Int>()
     private val listB = Stack<Int>()
 
