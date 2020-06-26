@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import java.util.*
 
 const val VALUES = "values"
@@ -75,8 +74,8 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun reset() {
-        listA.add(_scoreA.value)
-        listB.add(_scoreB.value)
+        listA.clear()
+        listB.clear()
         _scoreA.value = 0
         _scoreB.value = 0
     }
