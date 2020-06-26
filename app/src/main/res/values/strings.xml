@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Score</string>
+    <string name="textView_A">A队名</string>
+    <string name="textView_B">B队名</string>
+</resources>
