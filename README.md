@@ -5,6 +5,7 @@
 PS：up真的什么都会, 而且思路清晰，语言优美， 特别棒！！爱死up主了  
 
 参考代码<https://www.bilibili.com/video/BV1w4411t7UQ?p=13>  
+用到了up后面讲的一些东西，SharedPreferences实现数据的有效保存  
 **开始界面：**  
 可输入双方队名，其他按键为不可用状态  
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0626/210306_232c210a_7548047.png "屏幕截图.png")  
