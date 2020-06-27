@@ -2,7 +2,7 @@
 
 #### 介绍
 根据b站up logway777教程用kotlin写的  
-PS：up真的什么都会, 而且思路清晰，语言优美， 特别棒！！爱死up主了  
+PS：up真的什么都会绝对是宝藏up主, 而且思路清晰，声音优美， 特别棒！！爱死up主了  
 
 致谢视频<https://www.bilibili.com/video/BV1w4411t7UQ?p=13>  
 用到了up后面讲的一些东西，SharedPreferences实现数据的有效保存  
