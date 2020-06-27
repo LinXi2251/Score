@@ -163,9 +163,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
     // 保存数据
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         myViewModel.saveData()
     }
-
 }

@@ -42,8 +42,10 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     private val listA = Stack<Int>()
     private val listB = Stack<Int>()
 
+
     fun setFlagValue(flag:Int) {
         _visibleFlag.value = flag
+
     }
 
     fun setTeamNameA(name:String) {
