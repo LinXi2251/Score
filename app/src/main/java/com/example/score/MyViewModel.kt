@@ -49,11 +49,11 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setTeamNameA(name:String) {
-        _teamNameA.value = "$name 队"
+        _teamNameA.value = name
     }
 
     fun setTeamNameB(name:String) {
-        _teamNameB.value = "$name 队"
+        _teamNameB.value = name
     }
 
     fun addA(x:Int) {
