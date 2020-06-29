@@ -9,17 +9,30 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.example.score.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val myViewModel by viewModels<MyViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.data = myViewModel
+        binding.lifecycleOwner = this
         // 设置组件的集合实现其是否可见
         val setButtonsEnable = setOf(
-            buttonOK, button1A, button2A, button3A, button1B, button2B, button3B, imageButtonReset, imageButtonUndo
+            buttonOK,
+            button1A,
+            button2A,
+            button3A,
+            button1B,
+            button2B,
+            button3B,
+            imageButtonReset,
+            imageButtonUndo
         )
         val setVisibleStart = setOf(
             buttonOK, editTextTextA, editTextTextB
@@ -29,14 +42,6 @@ class MainActivity : AppCompatActivity() {
         )
         // end
 
-        // 数据展示用Observer进行观察
-        myViewModel.scoreA.observe(this, Observer {
-            textViewScoreA.text = it.toString()
-        })
-
-        myViewModel.scoreB.observe(this, Observer {
-            textViewScoreB.text = it.toString()
-        })
         // 根据flag的状态判断是在计数状态还是在设置队名状态
         myViewModel.visibleFlag.observe(this, Observer { flag ->
             // flag == 1 --> 已经完成队名的初始化 --> 开始界面部分组件隐藏
@@ -63,13 +68,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        myViewModel.teamNameA.observe(this, Observer {
-            textViewA.text = it
-        })
-
-        myViewModel.teamNameB.observe(this, Observer {
-            textViewB.text = it
-        })
         // end
 
         editTextTextA.requestFocus()
@@ -162,6 +160,7 @@ class MainActivity : AppCompatActivity() {
             myViewModel.reset()
         }
     }
+
     // 保存数据
     override fun onPause() {
         super.onPause()
