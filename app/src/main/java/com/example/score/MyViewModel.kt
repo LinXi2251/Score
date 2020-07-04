@@ -16,22 +16,11 @@ const val TEAM_NAME_B = "team_name_B"
 class MyViewModel(application: Application) : AndroidViewModel(application) {
     // 利用shp进行数据的保存(注意写法)
     private val shp = application.getSharedPreferences(VALUES, Context.MODE_PRIVATE)
-
-    private val _scoreA = MutableLiveData<Int>().also {
-        it.value = shp.getInt(SCORE_A, 0)
-    }
-    private val _scoreB = MutableLiveData<Int>().also {
-        it.value = shp.getInt(SCORE_B, 0)
-    }
-    private val _visibleFlag = MutableLiveData<Int>().also {
-        it.value = shp.getInt(VISIBLE_FLAG, 0)
-    }
-    private val _teamNameA = MutableLiveData<String>().also {
-        it.value = shp.getString(TEAM_NAME_A, application.getString(R.string.textView_A))
-    }
-    private val _teamNameB = MutableLiveData<String>().also {
-        it.value = shp.getString(TEAM_NAME_B, application.getString(R.string.textView_B))
-    }
+    private val _scoreA = MutableLiveData<Int>(shp.getInt(SCORE_A, 0))
+    private val _scoreB = MutableLiveData<Int>(shp.getInt(SCORE_B, 0))
+    private val _visibleFlag = MutableLiveData<Int>(shp.getInt(VISIBLE_FLAG, 0))
+    private val _teamNameA = MutableLiveData<String>(shp.getString(TEAM_NAME_A, application.getString(R.string.textView_A)))
+    private val _teamNameB = MutableLiveData<String>(shp.getString(TEAM_NAME_B, application.getString(R.string.textView_B)))
     val scoreA: LiveData<Int> = _scoreA
     val scoreB: LiveData<Int> = _scoreB
     val teamNameA:LiveData<String> = _teamNameA
